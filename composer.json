@@ -23,21 +23,31 @@
             "email": "contact@gammie.co.uk"
         }
     ],
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../core/",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
     "require": {
         "php": "^7.3",
-        "ext-json": "*"
+        "ext-json": "*",
+        "laravel-json-api/core": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.0"
     },
     "autoload": {
         "psr-4": {
-            "LaravelJsonApi\\{NAME}\\": "src/"
+            "LaravelJsonApi\\Schema\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "LaravelJsonApi\\{NAME}\\Tests\\": "tests/"
+            "LaravelJsonApi\\Schema\\Tests\\": "tests/"
         }
     },
     "extra": {
