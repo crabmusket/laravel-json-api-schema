@@ -106,7 +106,7 @@ abstract class Field implements FieldContract
      * @param bool $sparse
      * @return $this
      */
-    public function sparseFieldset(bool $sparse = true): Field
+    public function sparseField(bool $sparse = true): Field
     {
         $this->sparseField = $sparse;
 
@@ -119,9 +119,9 @@ abstract class Field implements FieldContract
      * @param bool $notSparse
      * @return $this
      */
-    public function notSparseFieldset(bool $notSparse = true): Field
+    public function notSparseField(bool $notSparse = true): Field
     {
-        return $this->sparseFieldset(false === $notSparse);
+        return $this->sparseField(false === $notSparse);
     }
 
     /**

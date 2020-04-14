@@ -23,4 +23,15 @@ use LaravelJsonApi\Core\Contracts\Schema\Attribute as AttributeContract;
 
 class Attribute extends Field implements AttributeContract
 {
+
+    /**
+     * Attribute constructor.
+     *
+     * @param string $name
+     */
+    public function __construct(string $name)
+    {
+        parent::__construct($name);
+        $this->sparseField();
+    }
 }

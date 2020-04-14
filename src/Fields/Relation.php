@@ -170,6 +170,19 @@ abstract class Relation extends Field implements RelationContract
     }
 
     /**
+     * Mark the relation as having both the self and related links.
+     *
+     * @param bool $links
+     * @return Relation
+     */
+    public function withLinks(bool $links = true): Relation
+    {
+        $this->withSelf($links)->withRelated($links);
+
+        return $this;
+    }
+
+    /**
      * @return bool
      */
     public function isIncludePath(): bool

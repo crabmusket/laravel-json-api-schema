@@ -23,6 +23,18 @@ class BelongsTo extends Relation
 {
 
     /**
+     * BelongsTo constructor.
+     *
+     * @param string $name
+     * @param string $inverse
+     */
+    public function __construct(string $name, string $inverse)
+    {
+        parent::__construct($name, $inverse);
+        $this->sparseField()->includePath()->withLinks();
+    }
+
+    /**
      * @inheritDoc
      */
     public function toOne(): bool
