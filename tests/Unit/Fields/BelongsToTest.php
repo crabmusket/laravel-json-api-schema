@@ -31,8 +31,7 @@ class BelongsToTest extends TestCase
         $this->assertSame('users', $field->inverse(), 'inverse');
         $this->assertTrue($field->toOne(), 'to one');
         $this->assertFalse($field->toMany(), 'to many');
-        $this->assertFalse($field->isFillable(), 'fillable');
-        $this->assertTrue($field->isGuarded(), 'guarded');
+        $this->assertFalse($field->isReadOnly(), 'fillable');
         $this->assertTrue($field->isSparseField(), 'sparse field');
         $this->assertFalse($field->isSortable(), 'sortable');
         $this->assertFalse($field->isFilter(), 'filter');

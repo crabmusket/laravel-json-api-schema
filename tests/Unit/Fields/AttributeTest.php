@@ -31,8 +31,7 @@ class AttributeTest extends TestCase
         $field = new Attribute('foo');
 
         $this->assertSame('foo', $field->name(), 'name');
-        $this->assertFalse($field->isFillable(), 'fillable');
-        $this->assertTrue($field->isGuarded(), 'guarded');
+        $this->assertFalse($field->isReadOnly(), 'read-only');
         $this->assertTrue($field->isSparseField(), 'sparse field');
         $this->assertFalse($field->isSortable(), 'sortable');
         $this->assertFalse($field->isFilter(), 'filter');
@@ -44,17 +43,13 @@ class AttributeTest extends TestCase
      * @param Attribute $field
      * @depends test
      */
-    public function testFillableAndGuarded(Attribute $field): void
+    public function testReadOnly(Attribute $field): void
     {
-        $this->assertSame($field, $field->fillable());
+        $this->assertSame($field, $field->readOnly());
+        $this->assertTrue($field->isReadOnly(), 'read-only');
 
-        $this->assertTrue($field->isFillable(), 'fillable');
-        $this->assertFalse($field->isGuarded(), 'not guarded');
-
-        $this->assertSame($field, $field->guarded());
-
-        $this->assertFalse($field->isFillable(), 'not fillable');
-        $this->assertTrue($field->isGuarded(), 'guarded');
+        $this->assertSame($field, $field->notReadOnly());
+        $this->assertFalse($field->isReadOnly(), 'not read-only');
     }
 
     /**

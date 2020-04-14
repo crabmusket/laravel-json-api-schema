@@ -31,8 +31,7 @@ class HasManyTest extends TestCase
         $this->assertSame('users', $field->inverse(), 'inverse');
         $this->assertFalse($field->toOne(), 'to one');
         $this->assertTrue($field->toMany(), 'to many');
-        $this->assertFalse($field->isFillable(), 'fillable');
-        $this->assertTrue($field->isGuarded(), 'guarded');
+        $this->assertFalse($field->isReadOnly(), 'read-only');
         $this->assertTrue($field->isSparseField(), 'sparse field');
         $this->assertFalse($field->isSortable(), 'sortable');
         $this->assertFalse($field->isFilter(), 'filter');

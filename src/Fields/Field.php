@@ -33,7 +33,7 @@ abstract class Field implements FieldContract
     /**
      * @var bool
      */
-    private $fillable;
+    private $readOnly;
 
     /**
      * @var bool
@@ -62,7 +62,7 @@ abstract class Field implements FieldContract
         }
 
         $this->name = $name;
-        $this->fillable = false;
+        $this->readOnly = false;
         $this->filter = false;
         $this->sparseField = false;
         $this->sortable = false;
@@ -77,27 +77,27 @@ abstract class Field implements FieldContract
     }
 
     /**
-     * Mark the field as mass-assignable.
+     * Mark the field as read-only.
      *
-     * @param bool $fillable
+     * @param bool $readOnly
      * @return $this
      */
-    public function fillable(bool $fillable = true): Field
+    public function readOnly(bool $readOnly = true): self
     {
-        $this->fillable = $fillable;
+        $this->readOnly = $readOnly;
 
         return $this;
     }
 
     /**
-     * Mark the field as not mass-assignable.
+     * Mark the field as not read-only.
      *
-     * @param bool $guarded
+     * @param bool $writeable
      * @return Field
      */
-    public function guarded(bool $guarded = true): Field
+    public function notReadOnly(bool $writeable = true): self
     {
-        return $this->fillable(false === $guarded);
+        return $this->readOnly(false === $writeable);
     }
 
     /**
@@ -106,7 +106,7 @@ abstract class Field implements FieldContract
      * @param bool $sparse
      * @return $this
      */
-    public function sparseField(bool $sparse = true): Field
+    public function sparseField(bool $sparse = true): self
     {
         $this->sparseField = $sparse;
 
@@ -119,7 +119,7 @@ abstract class Field implements FieldContract
      * @param bool $notSparse
      * @return $this
      */
-    public function notSparseField(bool $notSparse = true): Field
+    public function notSparseField(bool $notSparse = true): self
     {
         return $this->sparseField(false === $notSparse);
     }
@@ -130,7 +130,7 @@ abstract class Field implements FieldContract
      * @param bool $sortable
      * @return $this
      */
-    public function sortable(bool $sortable = true): Field
+    public function sortable(bool $sortable = true): self
     {
         $this->sortable = $sortable;
 
@@ -143,7 +143,7 @@ abstract class Field implements FieldContract
      * @param bool $notSortable
      * @return $this
      */
-    public function notSortable(bool $notSortable = true): Field
+    public function notSortable(bool $notSortable = true): self
     {
         return $this->sortable(false === $notSortable);
     }
@@ -154,7 +154,7 @@ abstract class Field implements FieldContract
      * @param bool $filter
      * @return $this
      */
-    public function filter(bool $filter = true): Field
+    public function filter(bool $filter = true): self
     {
         $this->filter = $filter;
 
@@ -167,7 +167,7 @@ abstract class Field implements FieldContract
      * @param bool $notFilter
      * @return $this
      */
-    public function notFilter(bool $notFilter = true): Field
+    public function notFilter(bool $notFilter = true): self
     {
         return $this->filter(false === $notFilter);
     }
@@ -175,17 +175,9 @@ abstract class Field implements FieldContract
     /**
      * @inheritDoc
      */
-    public function isFillable(): bool
+    public function isReadOnly(): bool
     {
-        return $this->fillable;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function isGuarded(): bool
-    {
-        return !$this->isFillable();
+        return $this->readOnly;
     }
 
     /**

@@ -86,7 +86,7 @@ abstract class Relation extends Field implements RelationContract
      * @param bool $include
      * @return $this
      */
-    public function includePath(bool $include = true): Relation
+    public function includePath(bool $include = true): self
     {
         $this->include = $include;
 
@@ -99,7 +99,7 @@ abstract class Relation extends Field implements RelationContract
      * @param bool $doNotInclude
      * @return Relation
      */
-    public function notIncludePath(bool $doNotInclude = true): Relation
+    public function notIncludePath(bool $doNotInclude = true): self
     {
         return $this->includePath(!$doNotInclude);
     }
@@ -110,7 +110,7 @@ abstract class Relation extends Field implements RelationContract
      * @param bool $default
      * @return $this
      */
-    public function defaultIncludePath(bool $default = true): Relation
+    public function defaultIncludePath(bool $default = true): self
     {
         if (true === $default) {
             $this->include = true;
@@ -127,7 +127,7 @@ abstract class Relation extends Field implements RelationContract
      * @param bool $self
      * @return $this
      */
-    public function withSelf(bool $self = true): Relation
+    public function withSelf(bool $self = true): self
     {
         $this->self = $self;
 
@@ -140,7 +140,7 @@ abstract class Relation extends Field implements RelationContract
      * @param bool $withoutSelf
      * @return $this
      */
-    public function withoutSelf(bool $withoutSelf = true): Relation
+    public function withoutSelf(bool $withoutSelf = true): self
     {
         return $this->withSelf(false === $withoutSelf);
     }
@@ -151,7 +151,7 @@ abstract class Relation extends Field implements RelationContract
      * @param bool $related
      * @return $this
      */
-    public function withRelated(bool $related = true): Relation
+    public function withRelated(bool $related = true): self
     {
         $this->related = $related;
 
@@ -164,7 +164,7 @@ abstract class Relation extends Field implements RelationContract
      * @param bool $withoutRelated
      * @return $this
      */
-    public function withoutRelated(bool $withoutRelated = true): Relation
+    public function withoutRelated(bool $withoutRelated = true): self
     {
         return $this->withRelated(false === $withoutRelated);
     }
@@ -173,9 +173,9 @@ abstract class Relation extends Field implements RelationContract
      * Mark the relation as having both the self and related links.
      *
      * @param bool $links
-     * @return Relation
+     * @return $this
      */
-    public function withLinks(bool $links = true): Relation
+    public function withLinks(bool $links = true): self
     {
         $this->withSelf($links)->withRelated($links);
 

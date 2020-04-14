@@ -37,7 +37,7 @@ class CommentSchema extends SchemaBuilder
      */
     public function createdAt(): Attribute
     {
-        return $this->attribute();
+        return $this->attribute()->readOnly();
     }
 
     /**
@@ -45,7 +45,7 @@ class CommentSchema extends SchemaBuilder
      */
     public function updatedAt(): Attribute
     {
-        return $this->attribute();
+        return $this->attribute()->readOnly();
     }
 
     /**
