@@ -19,10 +19,11 @@ declare(strict_types=1);
 
 namespace LaravelJsonApi\Schema;
 
-use LaravelJsonApi\Schema\Fields\FieldList;
+use LaravelJsonApi\Core\Contracts\Schema\FieldList;
+use LaravelJsonApi\Core\Contracts\Schema\Schema as SchemaContract;
 use function rtrim;
 
-class Schema
+class Schema implements SchemaContract
 {
 
     /**
@@ -55,9 +56,7 @@ class Schema
     }
 
     /**
-     * Get the resource type.
-     *
-     * @return string
+     * @inheritDoc
      */
     public function type(): string
     {
@@ -65,9 +64,7 @@ class Schema
     }
 
     /**
-     * Get the resource fields.
-     *
-     * @return FieldList
+     * @inheritDoc
      */
     public function fields(): FieldList
     {
@@ -75,7 +72,7 @@ class Schema
     }
 
     /**
-     * @return string
+     * @inheritDoc
      */
     public function baseUri(): string
     {

@@ -20,9 +20,9 @@ declare(strict_types=1);
 namespace LaravelJsonApi\Schema\Fields;
 
 use InvalidArgumentException;
-use LaravelJsonApi\Core\Contracts\Schema\FieldInterface;
+use LaravelJsonApi\Core\Contracts\Schema\Field as FieldContract;
 
-abstract class Field implements FieldInterface
+abstract class Field implements FieldContract
 {
 
     /**

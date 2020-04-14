@@ -20,9 +20,9 @@ declare(strict_types=1);
 namespace LaravelJsonApi\Schema\Fields;
 
 use InvalidArgumentException;
-use LaravelJsonApi\Core\Contracts\Schema\RelationInterface;
+use LaravelJsonApi\Core\Contracts\Schema\Relation as RelationContract;
 
-abstract class Relation extends Field implements RelationInterface
+abstract class Relation extends Field implements RelationContract
 {
 
     /**

@@ -19,8 +19,8 @@ declare(strict_types=1);
 
 namespace LaravelJsonApi\Schema\Fields;
 
-use LaravelJsonApi\Core\Contracts\Schema\AttributeInterface;
+use LaravelJsonApi\Core\Contracts\Schema\Attribute as AttributeContract;
 
-class Attribute extends Field implements AttributeInterface
+class Attribute extends Field implements AttributeContract
 {
 }

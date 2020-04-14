@@ -17,49 +17,50 @@
 
 namespace LaravelJsonApi\Schema\Tests;
 
-use LaravelJsonApi\Core\Contracts\Schema\AttributeInterface;
-use LaravelJsonApi\Core\Contracts\Schema\RelationInterface;
+use LaravelJsonApi\Schema\Fields\Attribute;
+use LaravelJsonApi\Schema\Fields\BelongsTo;
+use LaravelJsonApi\Schema\Fields\HasMany;
 use LaravelJsonApi\Schema\SchemaBuilder;
 
 class PostSchema extends SchemaBuilder
 {
 
     /**
-     * @return RelationInterface
+     * @return BelongsTo
      */
-    public function author(): RelationInterface
+    public function author(): BelongsTo
     {
         return $this->belongsTo(null, 'users');
     }
 
     /**
-     * @return RelationInterface
+     * @return HasMany
      */
-    public function comments(): RelationInterface
+    public function comments(): HasMany
     {
         return $this->hasMany();
     }
 
     /**
-     * @return AttributeInterface
+     * @return Attribute
      */
-    public function content(): AttributeInterface
+    public function content(): Attribute
     {
         return $this->attribute('description');
     }
 
     /**
-     * @return AttributeInterface
+     * @return Attribute
      */
-    public function slug(): AttributeInterface
+    public function slug(): Attribute
     {
         return $this->attribute();
     }
 
     /**
-     * @return AttributeInterface
+     * @return Attribute
      */
-    public function title(): AttributeInterface
+    public function title(): Attribute
     {
         return $this->attribute();
     }

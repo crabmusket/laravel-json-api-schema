@@ -19,8 +19,6 @@ declare(strict_types=1);
 
 namespace LaravelJsonApi\Schema;
 
-use LaravelJsonApi\Core\Contracts\Schema\AttributeInterface;
-use LaravelJsonApi\Core\Contracts\Schema\RelationInterface;
 use LaravelJsonApi\Core\Support\Str;
 use LaravelJsonApi\Schema\Fields\Attribute;
 use LaravelJsonApi\Schema\Fields\BelongsTo;
@@ -66,9 +64,9 @@ abstract class SchemaBuilder
      * Create an attribute field.
      *
      * @param string|null $name
-     * @return AttributeInterface
+     * @return Attribute
      */
-    protected function attribute(string $name = null): AttributeInterface
+    protected function attribute(string $name = null): Attribute
     {
         return new Attribute($name ?: $this->guessFieldName());
     }
@@ -78,9 +76,9 @@ abstract class SchemaBuilder
      *
      * @param string|null $name
      * @param string|null $inverse
-     * @return RelationInterface
+     * @return BelongsTo
      */
-    protected function belongsTo(string $name = null, string $inverse = null): RelationInterface
+    protected function belongsTo(string $name = null, string $inverse = null): BelongsTo
     {
         return new BelongsTo(
             $name = $name ?: $this->guessFieldName(),
@@ -93,9 +91,9 @@ abstract class SchemaBuilder
      *
      * @param string|null $name
      * @param string|null $inverse
-     * @return RelationInterface
+     * @return HasMany
      */
-    protected function hasMany(string $name = null, string $inverse = null): RelationInterface
+    protected function hasMany(string $name = null, string $inverse = null): HasMany
     {
         return new HasMany(
             $name = $name ?: $this->guessFieldName(),

@@ -19,8 +19,8 @@ declare(strict_types=1);
 
 namespace LaravelJsonApi\Schema\Fields;
 
-use LaravelJsonApi\Core\Contracts\Schema\AttributeInterface;
-use LaravelJsonApi\Core\Contracts\Schema\RelationInterface;
+use LaravelJsonApi\Core\Contracts\Schema\Attribute as AttributeContract;
+use LaravelJsonApi\Core\Contracts\Schema\Relation as RelationContract;
 use LaravelJsonApi\Schema\Utils\MethodIterator;
 use ReflectionMethod;
 use function is_subclass_of;
@@ -66,11 +66,11 @@ class FieldBuilder extends MethodIterator
      */
     private function attr(string $type): bool
     {
-        if ($type === AttributeInterface::class) {
+        if ($type === AttributeContract::class) {
             return true;
         }
 
-        return is_subclass_of($type, AttributeInterface::class);
+        return is_subclass_of($type, AttributeContract::class);
     }
 
     /**
@@ -81,10 +81,10 @@ class FieldBuilder extends MethodIterator
      */
     private function relation(string $type): bool
     {
-        if ($type === RelationInterface::class) {
+        if ($type === RelationContract::class) {
             return true;
         }
 
-        return is_subclass_of($type, RelationInterface::class);
+        return is_subclass_of($type, RelationContract::class);
     }
 }

@@ -19,15 +19,14 @@ declare(strict_types=1);
 
 namespace LaravelJsonApi\Schema\Fields;
 
-use Countable;
-use Generator;
 use IteratorAggregate;
-use LaravelJsonApi\Core\Contracts\Schema\FieldInterface;
-use LaravelJsonApi\Core\Contracts\Schema\RelationInterface;
-use OutOfBoundsException;
+use LaravelJsonApi\Core\Contracts\Schema\Field as FieldContract;
+use LaravelJsonApi\Core\Contracts\Schema\FieldList as FieldListContract;
+use LaravelJsonApi\Core\Contracts\Schema\Relation as RelationContract;
+use LogicException;
 use function ksort;
 
-class FieldList implements IteratorAggregate, Countable
+class FieldList implements FieldListContract, IteratorAggregate
 {
 
     /**
@@ -43,15 +42,15 @@ class FieldList implements IteratorAggregate, Countable
     /**
      * FieldList constructor.
      *
-     * @param FieldInterface ...$fields
+     * @param FieldContract ...$fields
      */
-    public function __construct(FieldInterface ...$fields)
+    public function __construct(FieldContract ...$fields)
     {
         $this->attributes = [];
         $this->relations = [];
 
         foreach ($fields as $field) {
-            if ($field instanceof RelationInterface) {
+            if ($field instanceof RelationContract) {
                 $this->relations[$field->name()] = $field;
                 continue;
             }
@@ -64,12 +63,21 @@ class FieldList implements IteratorAggregate, Countable
     }
 
     /**
-     * Get a field by name.
-     *
-     * @param string $name
-     * @return FieldInterface
+     * @inheritDoc
      */
-    public function field(string $name): FieldInterface
+    public function exists(string $name): bool
+    {
+        if (isset($this->attributes[$name])) {
+            return true;
+        }
+
+        return isset($this->relations[$name]);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function field(string $name): FieldContract
     {
         if (isset($this->attributes[$name])) {
             return $this->attributes[$name];
@@ -79,25 +87,21 @@ class FieldList implements IteratorAggregate, Countable
             return $this->relations[$name];
         }
 
-        throw new OutOfBoundsException("Field {$name} does not exist.");
+        throw new LogicException("Field {$name} does not exist.");
     }
 
     /**
-     * Return a generator to iterate over attributes.
-     *
-     * @return Generator
+     * @inheritDoc
      */
-    public function attributes(): Generator
+    public function attributes(): iterable
     {
         yield from $this->attributes;
     }
 
     /**
-     * Return a generator to iterate over relationships.
-     *
-     * @return Generator
+     * @inheritDoc
      */
-    public function relations(): Generator
+    public function relations(): iterable
     {
         yield from $this->relations;
     }
